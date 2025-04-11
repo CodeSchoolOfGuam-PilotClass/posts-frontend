@@ -35,6 +35,17 @@ export function PostsPage() {
     setCurrentPost(post)
   };
 
+  const handleUpdate = (post, params, successCallback) => {
+    console.log("in the handleUpdate function");
+    axios.patch(`http://localhost:3000/posts/${post.id}`, params)
+      .then((response) => {
+        console.log(response.data);
+        setPost(posts.map(post => post.id === response.data.id ? response.data : post));
+        successCallback();
+        setIsPostShowVisible(false);
+      })
+  };
+
   // calls handleIndex whenever the page loads
   useEffect(handleIndex, []);
 
@@ -43,7 +54,7 @@ export function PostsPage() {
       <PostsNew onCreate={handleCreate} />
       <PostsIndex posts={posts} onShow={handleShow} />
       <Modal show={isPostShowVisible} onClose={() => setIsPostShowVisible(false)}>
-        <PostsShow post={currentPost}/>
+        <PostsShow post={currentPost} onUpdate={handleUpdate} />
       </Modal>
     </main>
   )

@@ -5,6 +5,7 @@ export function Modal({ children, show, onClose }) {
     return (
       <div className="modal-background">
         <section className="modal-main">
+          {/* Renders any content passed between the Modal component's opening and closing tags */}
           {children}
           <button className="close" type="button" onClick={onClose}>Close</button>
         </section>
