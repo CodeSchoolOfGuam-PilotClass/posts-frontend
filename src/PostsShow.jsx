@@ -1,4 +1,4 @@
-export function PostsShow({ post, onUpdate }) {
+export function PostsShow({ post, onUpdate, onDestroy }) {
 
   const handleSubmit = (event) => {
     console.log("in the handleSubmit function");
@@ -23,6 +23,7 @@ export function PostsShow({ post, onUpdate }) {
         </div>
         <button type="submit">Update</button>
       </form>
+      <button onClick={() => onDestroy(post)}>Destroy</button>
     </div>
   );
 }
